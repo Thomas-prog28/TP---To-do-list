@@ -17,26 +17,30 @@ const selectList = document.querySelector("#todo-list");
 //acquisition de la tâche et ajout 
 addTask.addEventListener("submit", function (event) {
     event.preventDefault();
+    if (!inputTask.value.trim()) return;
     todos.push({ id: Date.now(), texte: inputTask.value, fait: false });
     const li = document.createElement("li");
     const checkBox = document.createElement("input");
     const span = document.createElement("span");
     checkBox.setAttribute("type", "checkbox");
+    checkBox.classList.add("checkbox");
     span.textContent = todos[todos.length - 1].texte;
+    // span.classList.add(".delet")
     li.style.listStyle = "none";
     li.appendChild(checkBox);
     li.appendChild(span);
     selectList.appendChild(li);
     inputTask.value = "";
-    checkBox.setAttribute("data-id", todos[todos.length - 1].id);
 
+    //checkbox
+    checkBox.setAttribute("data-id", todos[todos.length - 1].id);
     checkBox.addEventListener("change", function () {
         let checkData = Number(checkBox.getAttribute("data-id"));
         for (let ido of todos) {
             if (ido.id === checkData) {
                 ido.fait = checkBox.checked;
+                const span = checkBox.nextSibling;
                 if (checkBox.checked) {
-                    const span = checkBox.nextSibling;
                     span.style.textDecoration = "line-through";
                 } else {
                     span.style.textDecoration = "none";
@@ -44,4 +48,24 @@ addTask.addEventListener("submit", function (event) {
             }
         }
     });
+
+    //bouton delete
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+    deleteBtn.classList.add("deleteBtn");
+    li.appendChild(deleteBtn);
+    deleteBtn.setAttribute("data-id", todos[todos.length - 1].id);
+    deleteBtn.addEventListener("click", function () {
+        if (!checkBox.checked) return;
+        let deleteData = Number(deleteBtn.getAttribute("data-id"));
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i].id === deleteData) {
+                todos.splice(i, 1);   // ✔️ suppression dans le tableau
+                break;
+            }
+        }
+        li.remove();
+    });
+
+
 });
