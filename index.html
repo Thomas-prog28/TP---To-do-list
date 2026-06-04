@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <h1>Ma liste de course</h1>
+        <h1>Ma To do List</h1>
     </header>
 
     <form action="" method="get" id="todo-form">
@@ -22,16 +22,16 @@
     </form>
 
     <div class="todo-filters">
-        <button type="button" class="filter-btn active" data-filter="all">Toutes</button>
-        <button type="button" class="filter-btn " data-filter="todo">À faire</button>
-        <button type="button" class="filter-btn " data-filter="done">Faites</button>
+        <button type="button" class="disabledBtn filter-btn active" data-filter="all">Toutes</button>
+        <button type="button" class="disabledBtn filter-btn " data-filter="todo">À faire</button>
+        <button type="button" class="disabledBtn filter-btn " data-filter="done">Faites</button>
     </div>
 
     <ul id="todo-list"></ul>
 
     <div id="cookie-banner">
-        Ce site utilise des cookies fonctionnels pour garantir la meilleure expérience.
-        <button onclick="accepterCookies()">J'accepte</button>
+        <p>Ce site utilise des cookies fonctionnels pour garantir la meilleure expérience.</p>
+        <button id="cookieBtn">J'accepte</button>
     </div>
 </body>
 

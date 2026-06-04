@@ -1,25 +1,39 @@
-// function accepterCookies() {
-//   setCookie('rgpd_consent', 'true', 365); // 1 an
-//   document.getElementById('cookie-banner').style.display = 'none';
-// }
-
-// if (!getCookie('rgpd_consent')) {
-//   document.getElementById('cookie-banner').style.display = 'block';
-// }
-
-
 let todos = [];
 const addTask = document.querySelector("#todo-form");
 const inputTask = document.querySelector("#todo-input");
 const selectList = document.querySelector("#todo-list");
+const addBtn = document.querySelector(".todo_btn");
+const filtreBtn = document.querySelectorAll(".disabledBtn");
 
+//on récupère une collection de bouton filtre
 const filterBtn = document.querySelectorAll(".filter-btn");
 console.log(filterBtn);
 
+window.addEventListener("DOMContentLoaded", () => {
+    if (document.cookie.includes("rgpd_consent=")) {
+        document.getElementById('cookie-banner').style.display = 'none';
+    } else {
+        document.getElementById('cookie-banner').style.display = 'block';
+        inputTask.classList.add("disabled");
+        addBtn.classList.add("disabled");
+        filtreBtn.classList.add("disabled");
+        let cookieBtn = document.getElementById('cookieBtn');
+        cookieBtn.addEventListener("click", function () {
+            document.cookie = "rgpd_consent=true; max-age=2592000; path=/";
+            document.getElementById('cookie-banner').style.display = 'none';
+            inputTask.classList.remove("disabled");
+            addBtn.classList.remove("disabled");
+            filtreBtn.classList.remove("disabled");
+        });
+    }
+});
 
 //acquisition de la tâche et ajout 
 addTask.addEventListener("submit", function (event) {
-    event.preventDefault();
+    if (!document.cookie.includes("rgpd_consent=")) {
+        event.preventDefault();
+        return;
+    }
     if (!inputTask.value.trim()) return;
     todos.push({ id: Date.now(), texte: inputTask.value, fait: false });
     const li = document.createElement("li");
@@ -29,7 +43,6 @@ addTask.addEventListener("submit", function (event) {
     checkBox.classList.add("checkbox");
     span.textContent = todos[todos.length - 1].texte;
     li.style.listStyle = "none";
-    // selectList.classList.add("todo-list");
     li.appendChild(checkBox);
     li.appendChild(span);
     selectList.appendChild(li);
@@ -73,15 +86,63 @@ addTask.addEventListener("submit", function (event) {
 
 });
 
-
+//on parcours la collection de "bouton" du filtrage
 for (let btn of filterBtn) {
+    //on écoute sur quel bouton on a cliqué
     btn.addEventListener("click", function () {
-        let dataFilter = btn.getAttribute("data-filter");
-        console.log(dataFilter);
-        for (let b of filtreBtn) {
+
+        for (let b of filterBtn) {
             b.classList.remove("active");
         }
         btn.classList.add("active");
 
+        let tableLi = document.querySelectorAll("li");
+        console.log(tableLi);
+
+        for (let tab of tableLi) {
+            console.log(tab);
+            let dataFilter = btn.getAttribute("data-filter");
+            let checkbox = tab.querySelector("input[type='checkbox']");
+            let isDone = checkbox.checked;
+
+            if (dataFilter === "all") {
+                tab.style.display = "flex";
+            }
+            else if (dataFilter === "todo") {
+                if (isDone === true) {
+                    tab.style.display = "none";
+
+                } else {
+                    tab.style.display = "flex";
+                }
+            }
+            else if (dataFilter === "done") {
+                if (isDone === true) {
+                    tab.style.display = "flex";
+                } else {
+                    tab.style.display = "none";
+                }
+            }
+
+        }
+
+        //retirer le fond gris dans la conditions ou toutes les tâches sont cochés et le filtre sur "à faire"
+        let visibleCount = 0;
+
+        for (let tab of tableLi) {
+            if (tab.style.display !== "none") {
+                visibleCount++;
+            }
+        }
+
+        if (visibleCount === 0) {
+            selectList.classList.add("empty");
+        } else {
+            selectList.classList.remove("empty");
+        }
+
     });
 };
+
+
+

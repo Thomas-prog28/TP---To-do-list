@@ -6,7 +6,15 @@
 
 body {
     padding: 30px;
+    overflow-x: hidden;
+    max-width: 100%;
 }
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 
 header {
     text-align: center;
@@ -32,13 +40,16 @@ h1 {
 #todo-input {
     width: 100%;
     max-width: 400px;
+    height: 45px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 .todo_btn {
+    min-width: 44px;
+    min-height: 44px;
     padding: 6px 12px;
     background-color: rgb(80, 147, 248);
     color: white;
@@ -63,6 +74,8 @@ h1 {
 }
 
 .filter-btn {
+    min-width: 44px;
+    min-height: 44px;
     padding: 6px 12px;
     border-radius: 20px;
     background-color: #e0e0e0;
@@ -113,13 +126,10 @@ h1 {
     opacity: 0.5;
 }
 
-/* #todo-list {
-    background-color: #e0e0e0;
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-} */
+#todo-list.empty::before {
+    opacity: 0;
+}
+
 
 #todo-list li {
     display: flex;
@@ -167,20 +177,41 @@ h1 {
     right: 0;
     background: #222;
     color: white;
-    padding: 15px;
-    text-align: center;
-    width: 600px;
+    padding: 8px 10px;
+    width: 100%; /* IMPORTANT : plus de 100vw */
     margin: 0 auto;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    display: none;
+
+    display: flex;
+    flex-direction: column; /* mobile-first : tout centré */
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.1em;
+    text-align: center; /* texte centré */
 }
 
-#cookie-banner button {
-    background: #4CAF50;
+#cookie-banner p {
+    margin: 0;
+    padding: 0 10px; /* évite que le texte touche les bords */
+}
+
+#cookieBtn {
+    min-width: 44px;
+    min-height: 44px;
+    margin-top: 10px;
+    background-color: #4caf50;
     color: white;
-    padding: 8px 12px;
     border: none;
+    padding: 2px 14px; /* bouton moins imposant */
     border-radius: 4px;
-    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.15s ease;
+    font-size: 1em; /* cohérent avec ton texte */
+}
+
+#cookieBtn:hover {
+    background-color: #43a047;
+    transform: scale(1.05);
 }
