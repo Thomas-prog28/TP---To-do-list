@@ -55,6 +55,12 @@ h1 {
     transition: 0.2s ease;
 }
 
+.todo-filters {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 6px;
+}
 
 .filter-btn {
     padding: 6px 12px;
@@ -70,19 +76,50 @@ h1 {
     color: white;
 }
 
-.todo-filters {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+.filter-btn:hover {
+    background-color: rgb(100, 167, 255);
+    box-shadow: 0 0 8px rgba(80, 147, 248, 0.6);
+    transform: translateY(-1px);
+    transition: 0.2s ease;
+}
+
+#todo-list:empty {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
 }
 
 #todo-list {
+    position: relative;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#todo-list::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    /* invisible au début */
+    transition: opacity 0.5s ease;
+    z-index: -1;
+    /* derrière les <li> */
+}
+
+#todo-list:not(:empty)::before {
+    opacity: 0.5;
+}
+
+/* #todo-list {
     background-color: #e0e0e0;
     padding: 15px;
     margin-top: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+} */
 
 #todo-list li {
     display: flex;

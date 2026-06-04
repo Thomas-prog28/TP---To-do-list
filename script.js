@@ -13,6 +13,9 @@ const addTask = document.querySelector("#todo-form");
 const inputTask = document.querySelector("#todo-input");
 const selectList = document.querySelector("#todo-list");
 
+const filterBtn = document.querySelectorAll(".filter-btn");
+console.log(filterBtn);
+
 
 //acquisition de la tâche et ajout 
 addTask.addEventListener("submit", function (event) {
@@ -25,8 +28,8 @@ addTask.addEventListener("submit", function (event) {
     checkBox.setAttribute("type", "checkbox");
     checkBox.classList.add("checkbox");
     span.textContent = todos[todos.length - 1].texte;
-    // span.classList.add(".delet")
     li.style.listStyle = "none";
+    // selectList.classList.add("todo-list");
     li.appendChild(checkBox);
     li.appendChild(span);
     selectList.appendChild(li);
@@ -69,3 +72,16 @@ addTask.addEventListener("submit", function (event) {
 
 
 });
+
+
+for (let btn of filterBtn) {
+    btn.addEventListener("click", function () {
+        let dataFilter = btn.getAttribute("data-filter");
+        console.log(dataFilter);
+        for (let b of filtreBtn) {
+            b.classList.remove("active");
+        }
+        btn.classList.add("active");
+
+    });
+};
