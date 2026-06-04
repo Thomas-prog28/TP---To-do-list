@@ -5,14 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
     <title>To do list</title>
 </head>
 
 <body>
+    <header>
+        <h1>Ma Todo List Toto Garagiste</h1>
+    </header>
 
+    <form action="" method="get" id="todo-form">
+        <textarea id="todo-textarea" rows=" 5" cols="33" placeholder="entre ta To Do Tache"></textarea>
+
+        <button class="todo_btn" type="submit" value="Ajouter">Ajouter</button>
+    </form>
+
+    <div class="todo-filters">
+        <button type="button" class="filter-btn todo_btn active" data-filter="all">Toutes</button>
+        <button type="button" class="filter-btn todo_btn" data-filter="todo">À faire</button>
+        <button type="button" class="filter-btn todo_btn" data-filter="done">Faites</button>
+    </div>
+
+    <ul id="todo-list"></ul>
+
+    <div id="cookie-banner">
+        Ce site utilise des cookies fonctionnels pour garantir la meilleure expérience.
+        <button onclick="accepterCookies()">J'accepte</button>
+    </div>
 </body>
 
 </html>
