@@ -10,7 +10,7 @@ body {
     max-width: 100%;
 }
 
-.disabled {
+.disabled-btn {
     opacity: 0.5;
     pointer-events: none;
 }
