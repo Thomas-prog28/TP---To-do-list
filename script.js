@@ -3,15 +3,15 @@
 let todos = [];
 
 //récupération du formulaire d'ajout de tâche
-const addTask = document.querySelector("#todo-form");
+const addTask = document.querySelector(".form__todo");
 //récupération du champ de saisie de tâche
-const inputTask = document.querySelector("#todo-input");
+const inputTask = document.querySelector(".form__input");
 //récupération du bouton d'ajout de la tâche (submit)
-const addBtn = document.querySelector(".todo_btn");
+const addBtn = document.querySelector(".form__btn");
 //récupération de la liste UL qui contiendra les <li> des tâches
-const selectList = document.querySelector("#todo-list");
+const selectList = document.querySelector(".filterarea__list");
 //on récupère tous les boutons de filtre (Tous/ A faire / Faîtes)
-const filterBtn = document.querySelectorAll(".filter-btn");
+const filterBtn = document.querySelectorAll(".filter__btn");
 // console.log(filterBtn);
 
 //On écoute le moment ou le DOM est complètement chargé
@@ -19,10 +19,10 @@ window.addEventListener("DOMContentLoaded", () => {
     //Si le cookie RGPD est déja crée/validé
     if (document.cookie.split("; ").includes("rgpd_consent=true")) {
         //on masque la bannière
-        document.getElementById('cookie-banner').style.display = 'none';
+        document.getElementById('cookie__banner').style.display = 'none';
     } else {
         //sinon on affiche la bannière
-        document.getElementById('cookie-banner').style.display = 'block';
+        document.getElementById('cookie__banner').style.display = 'block';
         //et on désactive : le champ de saisie tant que l'utilisateur n'a pas accepté
         inputTask.classList.add("disabled-btn");
         //on désactive le bouton d'ajout de tâche
@@ -34,13 +34,13 @@ window.addEventListener("DOMContentLoaded", () => {
             fil.classList.add("disabled-btn");
         }
         //on récupère le bouton "j'accepte" du bouton cookie
-        let cookieBtn = document.getElementById('cookieBtn');
+        let cookieBtn = document.getElementById('cookie__Btn');
         //on écoute à quel moment se produit un click sur ce bouton
         cookieBtn.addEventListener("click", function () {
             //lorsqu'il y a le clique, on crée le cookie avec expiration à 30J
             document.cookie = "rgpd_consent=true; max-age=2592000; path=/";
             //puis on récupère le bandeau cookie et on le désactive
-            document.getElementById('cookie-banner').style.display = 'none';
+            document.getElementById('cookie__banner').style.display = 'none';
             //on réactive le champ de saisie
             inputTask.classList.remove("disabled-btn");
             //on réactive le bouton de tâche

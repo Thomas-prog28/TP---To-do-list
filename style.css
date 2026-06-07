@@ -16,7 +16,6 @@ body {
     pointer-events: none;
 }
 
-
 header {
     text-align: center;
     padding: 15px;
@@ -25,12 +24,12 @@ header {
     border-bottom: grey solid 2px;
 }
 
-h1 {
+#header__titre {
     font-size: 1.6em;
-    color: rgb(80, 147, 248)
+    color: rgb(80, 147, 248);
 }
 
-#todo-form {
+.form__todo {
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -38,9 +37,9 @@ h1 {
     gap: 10px;
 }
 
-#todo-input {
-    width: 100%;
-    max-width: 400px;
+.form__input {
+    width: 80%;
+    /* max-width: 400px; */
     height: 45px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -48,7 +47,7 @@ h1 {
     font-size: 0.9em;
 }
 
-.todo_btn {
+.form__btn {
     min-width: 44px;
     min-height: 44px;
     padding: 6px 12px;
@@ -60,21 +59,26 @@ h1 {
     cursor: pointer;
 }
 
-.todo_btn:hover {
+.form__btn:hover {
     background-color: rgb(100, 167, 255);
     box-shadow: 0 0 8px rgba(80, 147, 248, 0.6);
     transform: translateY(-1px);
     transition: 0.2s ease;
 }
 
-.todo-filters {
+.filterarea {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 6px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
-.filter-btn {
+.filterarea__btn {
+    display: flex;
+    gap: 30px;
+}
+
+.filter__btn {
     min-width: 44px;
     min-height: 44px;
     padding: 6px 12px;
@@ -85,31 +89,33 @@ h1 {
     font-size: 0.85em;
 }
 
-.filter-btn.active {
+.filter__btn.active {
     background-color: #c9b9b9;
     color: white;
 }
 
-.filter-btn:hover {
+.filter__btn:hover {
     background-color: rgb(100, 167, 255);
     box-shadow: 0 0 8px rgba(80, 147, 248, 0.6);
     transform: translateY(-1px);
     transition: 0.2s ease;
 }
 
-#todo-list:empty {
+.filterarea__list:empty {
     background-color: transparent;
     box-shadow: none;
     padding: 0;
 }
 
-#todo-list {
+.filterarea__list {
+    display: flex;
+    flex-direction: column;
     position: relative;
     padding: 15px;
     border-radius: 8px;
 }
 
-#todo-list::before {
+.filterarea__list::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -117,35 +123,33 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     opacity: 0;
-    /* invisible au début */
     transition: opacity 0.5s ease;
     z-index: -1;
-    /* derrière les <li> */
 }
 
-#todo-list:not(:empty)::before {
+.filterarea__list:not(:empty)::before {
     opacity: 0.5;
 }
 
-#todo-list.empty::before {
+.filterarea__list.empty::before {
     opacity: 0;
 }
 
-
-#todo-list li {
+.filterarea__list li {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 60vw;
     padding: 8px 12px;
     border-bottom: 1px solid #ddd;
 }
 
-#todo-list li input[type="checkbox"] {
+.filterarea__list li input[type="checkbox"] {
     margin-right: 8px;
     cursor: pointer;
 }
 
-#todo-list li span {
+.filterarea__list li span {
     flex: 1;
     margin-left: 10px;
     font-size: 0.95em;
@@ -171,7 +175,7 @@ h1 {
     transform: scale(1.1);
 }
 
-#cookie-banner {
+#cookie__banner {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -179,40 +183,131 @@ h1 {
     background: #222;
     color: white;
     padding: 8px 10px;
-    width: 100%; /* IMPORTANT : plus de 100vw */
+    width: 100%;
     margin: 0 auto;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-
     display: flex;
-    flex-direction: column; /* mobile-first : tout centré */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
     font-size: 1.1em;
-    text-align: center; /* texte centré */
+    text-align: center;
 }
 
-#cookie-banner p {
+#cookie__banner p {
     margin: 0;
-    padding: 0 10px; /* évite que le texte touche les bords */
+    padding: 0 10px;
 }
 
-#cookieBtn {
+#cookie__Btn {
     min-width: 44px;
     min-height: 44px;
     margin-top: 10px;
     background-color: #4caf50;
     color: white;
     border: none;
-    padding: 2px 14px; /* bouton moins imposant */
+    padding: 2px 14px;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.25s ease, transform 0.15s ease;
-    font-size: 1em; /* cohérent avec ton texte */
+    font-size: 1em;
 }
 
 #cookieBtn:hover {
     background-color: #43a047;
     transform: scale(1.05);
+}
+
+.footer {
+    margin-top: 40px;
+    padding: 20px 10px;
+    background-color: #f2f2f2;
+    border-top: 2px solid #ccc;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 0.9em;
+    color: #555;
+}
+
+.footer__links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer__links a {
+    text-decoration: none;
+    color: rgb(80, 147, 248);
+    font-weight: 500;
+}
+
+.footer__links a:hover {
+    color: rgb(15, 79, 177);
+    text-decoration: underline;
+}
+
+
+
+@media (min-width: 600px) {
+    #header__titre {
+        font-size: 3em;
+        color: rgb(15, 79, 177);
+    }
+
+    .form__todo {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .form__btn {
+        background-color: rgb(15, 79, 177);
+    }
+
+    .filterarea {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .filterarea__btn {
+        flex-direction: column;
+        font-size: 1.2em;
+        position: sticky;
+        top: 0px;
+        padding: 10px 0;
+    }
+}
+
+.filterarea__list li {
+    width: 40vw;
+}
+
+.footer {
+    font-size: 1em;
+    padding: 25px 10px;
+}
+
+.footer__links {
+    gap: 30px;
+}
+}
+
+@media (min-width: 1024px) {
+    #header__titre {
+        font-size: 3.2em;
+    }
+
+    .form__todo {
+        flex-direction: row;
+        justify-content: center;
+        gap: 100px;
+    }
+
+    .form__input {
+        width: 70%;
+    }
 }

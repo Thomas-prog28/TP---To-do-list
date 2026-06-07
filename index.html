@@ -13,26 +13,38 @@
 
 <body>
     <header>
-        <h1>Ma To do List</h1>
+        <h1 id="header__titre">Ma Todo List</h1>
     </header>
 
-    <form id="todo-form">
-        <input id="todo-input" type="text" placeholder="Entre ta tâche">
-        <button id="addTaskBtn" class="todo_btn" type="submit" value="Ajouter">Ajouter</button>
+    <form class="form__todo">
+        <input class="form__input" type="text" placeholder="Entre ta tâche">
+        <button class="form__btn" type="submit" value="Ajouter">Ajouter</button>
     </form>
 
-    <div class="todo-filters">
-        <button type="button" class="disabledBtn filter-btn active" data-filter="all">Toutes</button>
-        <button type="button" class="disabledBtn filter-btn " data-filter="todo">À faire</button>
-        <button type="button" class="disabledBtn filter-btn " data-filter="done">Faites</button>
-    </div>
+    <section class="filterarea">
+        <div class="filterarea__btn">
+            <button type="button" class="disabledBtn filter__btn active" data-filter="all">Toutes</button>
+            <button type="button" class="disabledBtn filter__btn " data-filter="todo">À faire</button>
+            <button type="button" class="disabledBtn filter__btn " data-filter="done">Faites</button>
+        </div>
 
-    <ul id="todo-list"></ul>
+        <ul class="filterarea__list"></ul>
+    </section>
 
-    <div id="cookie-banner">
+    <div id="cookie__banner">
         <p>Ce site utilise des cookies fonctionnels pour garantir la meilleure expérience.</p>
-        <button id="cookieBtn">J'accepte</button>
+        <button id="cookie__Btn">J'accepte</button>
     </div>
+
+    <footer class="footer">
+        <p class="footer__text">© 2026 — Ma Todo List</p>
+        <div class="footer__links">
+            <a href="#">Mentions légales</a>
+            <a href="#">Confidentialité</a>
+            <a href="#">Contact</a>
+        </div>
+    </footer>
+
 </body>
 
 </html>
